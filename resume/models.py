@@ -23,12 +23,17 @@ class Details(models.Model):
     created_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+    photo = models.FileField()
 
     class Meta:
         verbose_name_plural = 'details'
 
     def __str__(self):
-        return self.first_name + self.last_name
+        return self.first_name + ' ' + self.last_name
+
+    def age(self):
+        current = timezone.now()
+        return (current - self.birth_date)
 
 	def save(self, *args, **kwargs):
 		if not self.createdAt:
@@ -45,17 +50,26 @@ class Experience(models.Model):
     description = models.TextField(max_length=1000)
 
 class Education(models.Model):
+    DEGREE_CHOICES = (
+        ('H', 'High School'),
+        ('I', 'Intermediate'),
+        ('G', 'Graduate'),
+        ('P', 'Post Graduate'),
+        ('R', 'Research')
+    )
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=100)
+    degree = models.CharField(max_length=1, choices=DEGREE_CHOICES)
     start_year = models.CharField(max_length=4)
     end_year = models.CharField(max_length=4)
 
 class Project(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
     description = models.TextField(max_length=1000, null=True, blank=True)
     url = models.CharField(null=True, blank=True, max_length=500)
     image_file = models.FileField(blank=True)
 
     class Meta:
-        unique_together = ['user', 'name']
+        unique_together = ['user', 'title']

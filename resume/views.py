@@ -35,12 +35,12 @@ class ProfileCreate(CreateView):
 
         return redirect('resume:index')
 
-class ProfileUpdate(generic.DetailView):
+class ProfileUpdate(UpdateView):
     model = Details
     template_name = 'resume/profile_update.html'
     fields = ['first_name', 'last_name', 'birth_date', 'gender', 'contact', 'address', 'facebook', 'github', 'linkedin']
 
-class ExperienceAdd(generic.DetailView):
+class ExperienceAdd(View):
     form_class = ExperienceForm
     template_name = 'resume/experience_add.html'
 
@@ -52,17 +52,89 @@ class ExperienceAdd(generic.DetailView):
         form = self.form_class(request.POST)
 
         if form.is_valid():
-            profile = form.save(commit = False)
-            profile.user = request.user
-            profile.save()
+            experience = form.save(commit = False)
+            experience.user = request.user
+            experience.save()
 
         else:
             return render(request, self.template_name, {'errors': form.errors})
 
         return redirect('resume:experiences')
 
-# class ExperienceList(generic.DetailView):
-# class EducationAdd(generic.DetailView):
-# class EducationList(generic.DetailView)::
-# class ProjectAdd(generic.DetailView):
-# class ProjectList(generic.DetailView):
+class ExperienceList(generic.ListView):
+    template_name = 'resume/experiences.html'
+    context_object_name = 'all_experiences'
+
+    def get_queryset(self):
+        return Experience.objects.filter(user=request.user)
+
+class ExperienceUpdate(UpdateView):
+    model = Experience
+    template_name = 'resume/experience_update.html'
+    fields = ['company', 'start_date', 'end_date', 'description']
+
+class EducationAdd(View):
+    form_class = EducationForm
+    template_name = 'resume/education_add.html'
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            education = form.save(commit = False)
+            education.user = request.user
+            education.save()
+
+        else:
+            return render(request, self.template_name, {'errors': form.errors})
+
+        return redirect('resume:educations')
+
+class EducationList(generic.ListView):
+    template_name = 'resume/educations.html'
+    context_object_name = 'all_education'
+
+    def get_queryset(self):
+        return Education.objects.filter(user=request.user)
+
+class EducationUpdate(UpdateView):
+    model = Experience
+    template_name = 'resume/experience_update.html'
+    fields = ['institution_name', 'degree', 'start_year', 'end_year']
+
+class ProjectAdd(View):
+    form_class = ProjectForm
+    template_name = 'resume/project_add.html'
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            project = form.save(commit = False)
+            project.user = request.user
+            project.save()
+
+        else:
+            return render(request, self.template_name, {'errors': form.errors})
+
+        return redirect('resume:projects')
+
+class ProjectList(generic.ListView):
+    template_name = 'resume/projects.html'
+    context_object_name = 'all_projects'
+
+    def get_queryset(self):
+        return Project.objects.filter(user=request.user)
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    template_name = 'resume/project_update.html'
+    fields = ['title', 'description', 'url', 'image_file']

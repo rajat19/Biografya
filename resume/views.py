@@ -8,8 +8,9 @@ from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
 from django.views.generic import View
 from .models import Details, Education, Experience, Project
+from .forms import ProfileForm, ExperienceForm, EducationForm, ProjectForm
 
-class IndexView(ListView):
+class IndexView(generic.ListView):
     pass
 
 @method_decorator(login_required, name="dispatch")

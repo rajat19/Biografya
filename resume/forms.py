@@ -1,5 +1,5 @@
-from .models import Details
-from django import form, template
+from .models import Details, Experience, Education, Project
+from django import forms, template
 
 class ProfileForm(forms.ModelForm):
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Book Sharing App">
+	<meta name="author" content="Rajat Srivastava">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/fonts.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/materialize.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/fontawe/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/sweetalert2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/custom.css' %}">
+	<title class="samarkan">
+		{% block title %}Kora Kagaz{% endblock %}
+	</title>
+	<style type="text/css">
+		#top {
+			background-size: cover;
+			background-image: url('{% static 'books/images/a9.jpg' %}') !important;
+		}
+		section {
+			min-height: 100vh;
+		}
+		a{
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+	<section id="top">
+		<div class="container" style="margin-top: 150px;">
+			<div class="row">
+				<div class="col s12 m10 offset-m1 deep-orange-text">
+					<h3 class="samarkan">Kora Kagaz tha yeh mann mera.....</h3>
+					<h3 class="samarkan">Likh diya naam ispe tera...</h3>
+					<!-- <h3>कोरा कागज़ था यह मन मेरा....</h3><h3>लिख दिया नाम इस पे तेरा....</h3> -->
+					<a href="{% url 'accounts:login' %}" class="btn-large samarkan deep-orange">Start Sharing Books <span><i class="fa fa-book"></i></span></a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" src="{% static 'books/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/sweetalert2.min.js' %}"></script>
+</body>
+</html>

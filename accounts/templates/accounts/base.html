@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Resume Generator">
+	<meta name="author" content="Rajat Srivastava">
+	<link rel="stylesheet" type="text/css" href="{% static 'resume/css/fonts.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'resume/css/materialize.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'resume/fontawe/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'resume/css/sweetalert2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'resume/css/custom.css' %}">
+	<title class="samarkan">
+		{% block title %}Biografya{% endblock %}
+	</title>
+</head>
+<body class="{% block bgimg %}{% endblock %}">
+
+	<div class="container">
+		{% block body%}{% endblock %}
+	</div>
+
+	<script type="text/javascript" src="{% static 'resume/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/materialize.clockpicker.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/pagination.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/sweetalert2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'resume/js/custom.js' %}"></script>
+
+	{% block script %}{% endblock %}
+</body>
+</html>
